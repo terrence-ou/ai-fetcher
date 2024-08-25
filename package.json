@@ -1,6 +1,6 @@
 {
   "name": "ai-fetcher",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "build": "tsc",
     "lint": "eslint src --fix"
   },
-  "keywords": [],
+  "keywords": [
+    "typescript"
+  ],
   "author": "Terrence Ou",
   "license": "MIT",
   "devDependencies": {
