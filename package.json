@@ -1,16 +1,19 @@
 {
   "name": "ai-fetcher",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
+  "types": "./src/index.d.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "clean": "rm -rf ./lib/",
     "lint": "eslint src --fix"
   },
   "keywords": [
     "typescript"
   ],
+  "type": "module",
   "author": "Terrence Ou",
   "license": "MIT",
   "devDependencies": {
