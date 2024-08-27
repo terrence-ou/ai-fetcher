@@ -1,6 +1,6 @@
 import axios from "axios";
-import { TRANSLATION_FAIL_MESSAGE } from "./consts";
-import { DeepLResult } from "../types/types";
+import { TRANSLATION_FAIL_MESSAGE } from "./consts.js";
+import { DeepLResult } from "../types/types.js";
 
 export class DeepL {
   private api: string;
@@ -26,10 +26,12 @@ export class DeepL {
   async translate(
     from: string,
     to: string,
-    text: string,
+    text: string[] | string,
   ): Promise<DeepLResult[]> {
+    // DeepL requires the input text to be an array of strings
+    const inputText = typeof text === "string" ? [text] : text;
     const data = {
-      text,
+      text: inputText,
       target_lang: to.toUpperCase(),
       source_lang: from.toUpperCase(),
     };
