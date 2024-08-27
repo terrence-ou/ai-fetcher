@@ -1,6 +1,6 @@
 import axios from "axios";
 import { TRANSLATION_FAIL_MESSAGE } from "./consts.js";
-import { DeepLResult } from "../types/types.js";
+import type { DeepLResult } from "../types/types.js";
 
 export class DeepL {
   private api: string;
