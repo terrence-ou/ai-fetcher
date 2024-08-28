@@ -1,1 +1,1 @@
-export { DeepL } from "./lib/deepl.js";
+export { DeepL } from "./lib/deepl";
