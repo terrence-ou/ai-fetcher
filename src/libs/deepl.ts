@@ -6,16 +6,17 @@ export class DeepL {
   private api: string;
   private isPro: boolean;
   private headers: { Authorization: string; "Content-Type": string };
-  public url: string;
 
-  endpoints = {
-    free: "https://api-free.deepl.com/v2/translate",
-    pro: "https://api.deepl.com/v2/translate",
-  };
+  public url: string;
+  public endpoints: { free: string; pro: string };
 
   constructor(deepLKey: string, pro: boolean = false) {
     this.api = deepLKey;
     this.isPro = pro;
+    this.endpoints = {
+      free: "https://api-free.deepl.com/v2/translate",
+      pro: "https://api.deepl.com/v2/translate",
+    };
     this.url = this.isPro ? this.endpoints["pro"] : this.endpoints["free"];
     this.headers = {
       Authorization: `DeepL-Auth-Key ${this.api}`,
