@@ -1,14 +1,17 @@
 {
   "name": "ai-fetcher",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "clean": "rm -rf ./dist/",
-    "lint": "eslint src --fix",
-    "start": "tsc && node dist/index.js"
+    "lint": "eslint src --fix"
   },
   "keywords": [
     "typescript"
