@@ -1,5 +1,4 @@
 import axios from "axios";
-import { TRANSLATION_FAIL_MESSAGE } from "./consts.js";
 import type { DeepLResult } from "../types/types.js";
 
 export class DeepL {
@@ -42,13 +41,8 @@ export class DeepL {
       });
       return response.data.translations as DeepLResult[];
     } catch (error) {
-      console.error(error);
-      return [
-        {
-          detected_source_language: "ERROR",
-          text: TRANSLATION_FAIL_MESSAGE,
-        },
-      ];
+      if (error instanceof Error) throw new Error(error.message);
+      else throw new Error(String(error));
     }
   }
 }

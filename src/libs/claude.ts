@@ -1,8 +1,10 @@
-type ClaudeModel =
-  | "claude-3-haiku-20240307"
-  | "claude-3-sonnet-20240229"
-  | "claude-3-opus-20240229"
-  | "claude-3-5-sonnet-20240620";
+import axios from "axios";
+import type {
+  ClaudeInputData,
+  ClaudeMessage,
+  ClaudeModel,
+  ClaudeResult,
+} from "../types/types.js";
 
 export class Claude {
   private api: string;
@@ -29,5 +31,27 @@ export class Claude {
     };
   }
 
-  async generate() {}
+  async generate(
+    system: string,
+    messages: ClaudeMessage[],
+    temperature: number = 0,
+    max_tokens: number = 1000,
+  ): Promise<ClaudeResult> {
+    const data: ClaudeInputData = {
+      model: this.model,
+      max_tokens,
+      temperature,
+      system,
+      messages,
+    };
+    try {
+      const response = (await axios.post(this.endpoint, data, {
+        headers: this.headers,
+      })) as ClaudeResult;
+      return response;
+    } catch (error) {
+      if (error instanceof Error) throw new Error(error.message);
+      else throw new Error(String(error));
+    }
+  }
 }
