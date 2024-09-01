@@ -27,7 +27,7 @@ export class DeepL {
     from: string,
     to: string,
     text: string[] | string,
-  ): Promise<DeepLResult[]> {
+  ): Promise<DeepLResult> {
     // DeepL requires the input text to be an array of strings
     const inputText = typeof text === "string" ? [text] : text;
     const data = {
@@ -39,7 +39,7 @@ export class DeepL {
       const response = await axios.post(this.url, data, {
         headers: this.headers,
       });
-      return response.data.translations as DeepLResult[];
+      return response.data as DeepLResult;
     } catch (error) {
       if (error instanceof Error) throw new Error(error.message);
       else throw new Error(String(error));

@@ -1,4 +1,6 @@
-export type DeepLResult = { detected_source_language: string; text: string };
+// Types for DeepL
+export type DeepLContent = { detected_source_language: string; text: string };
+export type DeepLResult = { translations: DeepLContent[] };
 
 // Types for Claude
 export type ClaudeModel =
