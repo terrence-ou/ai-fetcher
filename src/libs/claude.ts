@@ -6,16 +6,22 @@ import type {
   ClaudeResult,
 } from "../types/types.js";
 
+// The Claude Agent class
 export class Claude {
-  private api: string;
+  private api: string; // API key provided by the user
   private headers: {
     "x-api-key": string;
     "anthropic-version": string;
     "Content-Type": string;
-  };
-  public endpoint: string;
-  public model: ClaudeModel;
+  }; // Headers for Claude requests
+  public endpoint: string; // The API endpoint url
+  public model: ClaudeModel; // The flag to specify the Claude model
 
+  /*
+   * Constructs a new instance of Claude class
+   * @param claudeKey: string - The user's Claude authentication key
+   * @param model: ClaudeModel - Should be one of the model string provided by Claude
+   */
   constructor(
     claudeKey: string,
     model: ClaudeModel = "claude-3-haiku-20240307",
@@ -31,6 +37,10 @@ export class Claude {
     };
   }
 
+  /*
+   * Generates a response from Claude
+   * @param system: string.
+   */
   async generate(
     system: string,
     messages: ClaudeMessage[],
@@ -45,9 +55,9 @@ export class Claude {
       messages,
     };
     try {
-      const response = (await axios.post(this.endpoint, data, {
+      const response = await axios.post(this.endpoint, data, {
         headers: this.headers,
-      }));
+      });
       return response.data as ClaudeResult;
     } catch (error) {
       if (error instanceof Error) throw new Error(error.message);
