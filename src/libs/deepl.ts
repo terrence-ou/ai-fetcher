@@ -23,18 +23,26 @@ export class DeepL {
     };
   }
 
-  async translate(
-    from: string,
-    to: string,
-    text: string[] | string,
-  ): Promise<DeepLResult> {
+  async translate({
+    from,
+    to,
+    text,
+  }: {
+    from?: string;
+    to: string;
+    text: string[] | string;
+  }): Promise<DeepLResult> {
     // DeepL requires the input text to be an array of strings
     const inputText = typeof text === "string" ? [text] : text;
-    const data = {
-      text: inputText,
-      target_lang: to.toUpperCase(),
-      source_lang: from.toUpperCase(),
-    };
+    const data: { source_lang?: string; target_lang: string; text: string[] } =
+      {
+        text: inputText,
+        target_lang: to.toUpperCase(),
+      };
+    // source_lang is an optional attribute
+    if (from) {
+      data.source_lang = from.toUpperCase();
+    }
     try {
       const response = await axios.post(this.url, data, {
         headers: this.headers,

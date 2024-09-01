@@ -8,7 +8,12 @@
     "dist"
   ],
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
+=======
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+>>>>>>> 86c5f9b (tests updated)
     "build": "tsc",
     "clean": "rm -rf ./dist/",
     "lint": "eslint src --fix"
@@ -21,6 +26,7 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@vitest/coverage-v8": "^2.0.5",
     "eslint": "^9.9.0",
     "globals": "^15.9.0",
     "typescript": "^5.5.4",
