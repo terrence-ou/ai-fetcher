@@ -9,7 +9,6 @@ afterAll(() => server.close());
 const mockKey = "mockapikey";
 const invalidKey = "invalidkey";
 const translationInput = { from: "ZH", to: "EN", text: "Mock text" };
-const invalidTranslationInput = { to: undefined, text: undefined };
 
 describe("DeepL attribute checks", () => {
   it("initialize DeepL agent", () => {
