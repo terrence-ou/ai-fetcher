@@ -1,13 +1,15 @@
 import { expect, it, describe, beforeAll, afterAll, afterEach } from "vitest";
 import { server } from "./mock/node";
-import { DeepL } from "../libs/deepl";
+import { DeepL } from "../index";
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 const mockKey = "mockapikey";
+const invalidKey = "invalidkey";
 const translationInput = { from: "ZH", to: "EN", text: "Mock text" };
+const invalidTranslationInput = { to: undefined, text: undefined };
 
 describe("DeepL attribute checks", () => {
   it("initialize DeepL agent", () => {
@@ -43,5 +45,17 @@ describe("Fetch translations", () => {
     const deepLAgent = new DeepL(mockKey, true);
     const response = await deepLAgent.translate(translationInput);
     expect(response.translations[0].text).toBe("Mock DeepL Pro Response");
+  });
+});
+
+describe("Provide invalid apikey to raise rejections", () => {
+  it("check free api rejection", async () => {
+    const deepLAgent = new DeepL(invalidKey);
+    await expect(deepLAgent.translate(translationInput)).rejects.toThrowError();
+  });
+
+  it("check free api rejection", async () => {
+    const deepLAgent = new DeepL(invalidKey, true);
+    await expect(deepLAgent.translate(translationInput)).rejects.toThrowError();
   });
 });
