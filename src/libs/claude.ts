@@ -47,8 +47,8 @@ export class Claude {
     try {
       const response = (await axios.post(this.endpoint, data, {
         headers: this.headers,
-      })) as ClaudeResult;
-      return response;
+      }));
+      return response.data as ClaudeResult;
     } catch (error) {
       if (error instanceof Error) throw new Error(error.message);
       else throw new Error(String(error));

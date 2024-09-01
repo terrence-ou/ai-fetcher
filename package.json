@@ -8,12 +8,8 @@
     "dist"
   ],
   "scripts": {
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1",
-=======
     "test": "vitest",
     "coverage": "vitest run --coverage",
->>>>>>> 86c5f9b (tests updated)
     "build": "tsc",
     "clean": "rm -rf ./dist/",
     "lint": "eslint src --fix"
