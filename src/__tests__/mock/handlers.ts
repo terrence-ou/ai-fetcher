@@ -3,7 +3,7 @@ import { http, HttpResponse } from "msw";
 const deeplHandlers = [
   // mock deepl free api response
   http.post("https://api-free.deepl.com/v2/translate", ({ request }) => {
-    const apiKey = request.headers.get("authorization").split(" ")[1];
+    const apiKey = request.headers.get("authorization")!.split(" ")[1];
     if (apiKey === "invalidkey") {
       return new HttpResponse(null, { status: 401 });
     }
@@ -15,7 +15,7 @@ const deeplHandlers = [
   }),
   // mock deepl pro api response
   http.post("https://api.deepl.com/v2/translate", ({ request }) => {
-    const apiKey = request.headers.get("authorization").split(" ")[1];
+    const apiKey = request.headers.get("authorization")!.split(" ")[1];
     if (apiKey === "invalidkey") {
       return new HttpResponse(null, { status: 401 });
     }
