@@ -1,9 +1,20 @@
 {
   "name": "ai-fetcher",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "A Node.js package that provides integration with popular language models. It is designed to facilitate easy and efficient ai-fetching tasks for your application.",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Terrence Ou",
+    "url": "https://github.com/terrence-ou"
+  },
+  "repository": "github:terrence-ou/ai-fetcher",
+  "keywords": [
+    "typescript",
+    "DeepL",
+    "Claude"
+  ],
   "files": [
     "dist"
   ],
@@ -14,12 +25,7 @@
     "clean": "rm -rf ./dist/",
     "lint": "eslint src --fix"
   },
-  "keywords": [
-    "typescript"
-  ],
   "type": "module",
-  "author": "Terrence Ou",
-  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@vitest/coverage-v8": "^2.0.5",
