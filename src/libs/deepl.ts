@@ -3,7 +3,7 @@ import type { DeepLResult } from "../types/types.js";
 
 // The DeepL Agent class
 export class DeepL {
-  private api: string; // API key provided by the user
+  private apiKey: string; // API key provided by the user
   private isPro: boolean; // Flag to indicate whether the user is using the pro version api
   private headers: { Authorization: string; "Content-Type": string }; // Headers for DeepL requests
 
@@ -16,7 +16,7 @@ export class DeepL {
    * @param isPro (optional) - boolean. Specifies if the user is using the pro version api
    */
   constructor(deepLKey: string, isPro: boolean = false) {
-    this.api = deepLKey;
+    this.apiKey = deepLKey;
     this.isPro = isPro;
     this.endpoints = {
       free: "https://api-free.deepl.com/v2/translate",
@@ -24,7 +24,7 @@ export class DeepL {
     };
     this.url = this.isPro ? this.endpoints["pro"] : this.endpoints["free"];
     this.headers = {
-      Authorization: `DeepL-Auth-Key ${this.api}`,
+      Authorization: `DeepL-Auth-Key ${this.apiKey}`,
       "Content-Type": "application/json",
     };
   }
