@@ -30,9 +30,46 @@ export interface ClaudeInputData {
   messages: ClaudeMessage[];
 }
 
-// Types for OpenAI
+// Types for OpenAI Chat
 export type OpenAIChatModel =
   | "gpt-4o"
   | "gpt-4o-mini"
   | "gpt-4-turbo"
   | "gpt-4";
+
+export type OpenAIMessage = {
+  role: "system" | "user" | "assistant";
+  content: string;
+};
+export type OpenAIResult = {
+  id: string;
+  object: string;
+  created: number;
+  model: string;
+  system_fingerprint: string;
+  choices: {
+    index: number;
+    message: OpenAIMessage;
+    logprobs: null | object;
+    finish_reason: string;
+  }[];
+  usage: {
+    prompt_tokens: number;
+    completion_tokens: number;
+    total_tokens: number;
+  };
+};
+export interface OpenAIInputData {
+  model: OpenAIChatModel;
+  messages: OpenAIMessage[];
+}
+
+// Types for OpenAI Speech
+export type OpenAISpeechModel = "tts-1" | "tts-1-hd";
+export type OpenAIVoice =
+  | "alloy"
+  | "echo"
+  | "fable"
+  | "onyx"
+  | "nova"
+  | "shimmer";
