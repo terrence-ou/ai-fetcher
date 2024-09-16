@@ -1,6 +1,6 @@
 {
   "name": "ai-fetcher",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Node.js package that provides integration with popular language models. It is designed to facilitate easy and efficient ai-fetching tasks for your application.",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,7 +23,8 @@
     "coverage": "vitest run --coverage",
     "build": "tsc",
     "clean": "rm -rf ./dist/",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --fix",
+    "publish": "npm run clean && npm run build && npm publish"
   },
   "type": "module",
   "devDependencies": {
