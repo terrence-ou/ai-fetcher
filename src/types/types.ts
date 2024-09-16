@@ -41,7 +41,7 @@ export type OpenAIMessage = {
   role: "system" | "user" | "assistant";
   content: string;
 };
-export type OpenAIResult = {
+export type OpenAIChatResult = {
   id: string;
   object: string;
   created: number;
@@ -59,17 +59,23 @@ export type OpenAIResult = {
     total_tokens: number;
   };
 };
-export interface OpenAIInputData {
+export interface OpenAIChatInputData {
   model: OpenAIChatModel;
   messages: OpenAIMessage[];
 }
 
 // Types for OpenAI Speech
 export type OpenAISpeechModel = "tts-1" | "tts-1-hd";
-export type OpenAIVoice =
+export type OpenAITTSVoice =
   | "alloy"
   | "echo"
   | "fable"
   | "onyx"
   | "nova"
   | "shimmer";
+export type OpenAITTSResult = string | Buffer | undefined;
+export interface OpenAITTSInputData {
+  model: OpenAISpeechModel;
+  input: string;
+  voice: OpenAITTSVoice;
+}
