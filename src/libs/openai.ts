@@ -8,11 +8,11 @@ import {
 } from "../types/types.js";
 
 export class OpenAI {
-  chat(apiKey: string, model: OpenAIChatModel) {
+  static chat(apiKey: string, model: OpenAIChatModel) {
     return new Chat(apiKey, model);
   }
 
-  textToAudio(apiKey: string) {
+  static textToAudio(apiKey: string) {
     return new TextToAudio(apiKey);
   }
 }
