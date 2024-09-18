@@ -13,16 +13,16 @@ import {
 } from "../types/types.js";
 
 export class OpenAI {
-  static chat(apiKey: string, model: OpenAIChatModel) {
+  static chat(apiKey: string, model: OpenAIChatModel = "gpt-4o-mini") {
     return new Chat(apiKey, model);
   }
 
-  static textToAudio(apiKey: string) {
-    return new TextToAudio(apiKey);
+  static textToSpeech(apiKey: string) {
+    return new TextToSpeech(apiKey);
   }
 }
 
-class Chat {
+export class Chat {
   private apiKey: string;
   private headers: {
     "Content-Type": string;
@@ -63,7 +63,7 @@ class Chat {
   }
 }
 
-class TextToAudio {
+export class TextToSpeech {
   private apiKey: string;
   public model: OpenAISpeechModel;
   public endpoint: string;
@@ -83,9 +83,9 @@ class TextToAudio {
 
   async convert(
     text: string | undefined,
-    voice: OpenAITTSVoice = "alloy",
     returnType: "filename" | "buffer" | "base64" = "filename",
     filename: string = "speech.mp3",
+    voice: OpenAITTSVoice = "alloy",
   ): Promise<OpenAITTSResult> {
     // if the input text is undefined, throw an error
     if (text === undefined) throw new Error("The input text is undefined");
@@ -100,8 +100,8 @@ class TextToAudio {
       if (returnType === "buffer") return buffer;
       else if (returnType === "base64") return buffer.toString("base64");
       else if (returnType === "filename") {
-        // TODO: implement path validation
-        const outputPath = path.resolve(`./${filename}`);
+        const validatedFilename = processFilename(filename);
+        const outputPath = path.resolve(validatedFilename);
         await fs.promises.writeFile(outputPath, buffer);
         return outputPath;
       } else return undefined;
@@ -112,7 +112,10 @@ class TextToAudio {
   }
 }
 
-// const processFilename = (originalFilename: string): string => {
-//   console.log(originalFilename);
-//   return originalFilename;
-// };
+export const processFilename = (originalFilename: string) => {
+  const paths = originalFilename.split("/").filter((path) => path !== "");
+  if (paths.length === 0) return "speech.mp3";
+  const extension = paths.slice(-1)[0].slice(-4);
+  if (extension !== ".mp3") paths.push("speech.mp3");
+  return paths.join("/");
+};
