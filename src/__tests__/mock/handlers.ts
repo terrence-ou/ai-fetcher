@@ -1,10 +1,12 @@
 import { http, HttpResponse } from "msw";
 
+const invalidKey = "invalidkey";
+
 const deeplHandlers = [
   // mock deepl free api response
   http.post("https://api-free.deepl.com/v2/translate", ({ request }) => {
     const apiKey = request.headers.get("authorization")!.split(" ")[1];
-    if (apiKey === "invalidkey") {
+    if (apiKey === invalidKey) {
       return new HttpResponse(null, { status: 401 });
     }
     return HttpResponse.json({
@@ -16,7 +18,7 @@ const deeplHandlers = [
   // mock deepl pro api response
   http.post("https://api.deepl.com/v2/translate", ({ request }) => {
     const apiKey = request.headers.get("authorization")!.split(" ")[1];
-    if (apiKey === "invalidkey") {
+    if (apiKey === invalidKey) {
       return new HttpResponse(null, { status: 401 });
     }
     return HttpResponse.json({
@@ -30,7 +32,7 @@ const deeplHandlers = [
 const claudeHandlers = [
   http.post("https://api.anthropic.com/v1/messages", ({ request }) => {
     const apiKey = request.headers.get("x-api-key");
-    if (apiKey === "invalidkey") {
+    if (apiKey === invalidKey) {
       return new HttpResponse(null, { status: 401 });
     }
     return HttpResponse.json({
@@ -51,4 +53,41 @@ const claudeHandlers = [
   }),
 ];
 
-export const handlers = [...deeplHandlers, ...claudeHandlers];
+const openaiHandlers = [
+  // mock openai chat response
+  http.post("https://api.openai.com/v1/chat/completions", ({ request }) => {
+    const apiKey = request.headers.get("authorization")!.split(" ")[1];
+    if (apiKey === invalidKey) {
+      return new HttpResponse(null, { status: 401 });
+    }
+    return HttpResponse.json({
+      id: "",
+      object: "",
+      created: new Date().getTime(),
+      model: "",
+      system_fingerprint: "",
+      choices: [
+        {
+          index: 0,
+          message: {
+            role: "user",
+            message: "response message",
+            logprobs: null,
+            finish_reason: "",
+          },
+        },
+      ],
+      usage: {
+        prompt_tokens: 0,
+        completion_tokens: 0,
+        total_tokens: 0,
+      },
+    });
+  }),
+];
+
+export const handlers = [
+  ...deeplHandlers,
+  ...claudeHandlers,
+  ...openaiHandlers,
+];
