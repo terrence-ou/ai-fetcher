@@ -10,7 +10,7 @@ export class DeepL {
   public url: string; // The API endpoint url
   public endpoints: { free: string; pro: string };
 
-  /*
+  /**
    * Construcs a new instance of DeepL class
    * @param deepLKey: string - The user's DeepL authentication key
    * @param isPro (optional) - boolean. Specifies if the user is using the pro version api
@@ -29,7 +29,7 @@ export class DeepL {
     };
   }
 
-  /*
+  /**
    * Translate the given text fron one language to another
    * The input is an JavaScript Object
    * @param from (optional): string - Should be one of the supported language.

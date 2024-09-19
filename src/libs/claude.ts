@@ -17,7 +17,7 @@ export class Claude {
   public endpoint: string; // The API endpoint url
   public model: ClaudeModel; // The flag to specify the Claude model
 
-  /*
+  /**
    * Constructs a new instance of Claude class
    * @param claudeKey: string - The user's Claude authentication key
    * @param model: ClaudeModel - Should be one of the model string provided by Claude
@@ -37,7 +37,7 @@ export class Claude {
     };
   }
 
-  /*
+  /**
    * Generates a response from Claude.
    * @param system: string - The system prompt or context that guides the model's behavior.
    * @param messages: ClaudeMessage[] - An array of ClaudeMessages representing the conversation history.
@@ -45,7 +45,7 @@ export class Claude {
    * @param max_tokens (Optional): number - A number represents the maximum output tokens (words or word fragments). Defaults to 1000.
    *
    * @returns A promise that resolves to a ClaudeResult containing the generated text result.
-   * @throws An error is the API request fails.
+   * @throws An error if the API request fails.
    */
   async generate(
     system: string,
