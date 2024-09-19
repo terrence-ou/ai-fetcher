@@ -84,6 +84,14 @@ const openaiHandlers = [
       },
     });
   }),
+  // mock openai tts response
+  http.post("https://api.openai.com/v1/audio/speech", async ({ request }) => {
+    const apiKey = request.headers.get("authorization")!.split(" ")[1];
+    if (apiKey === invalidKey) {
+      return new HttpResponse(null, { status: 401 });
+    }
+    return HttpResponse.arrayBuffer(Buffer.from("sample result"));
+  }),
 ];
 
 export const handlers = [
