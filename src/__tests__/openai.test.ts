@@ -66,9 +66,9 @@ describe("Fetch TTS results", () => {
     const filenameResponse = await openaiAgent.convert(
       "test",
       "filename",
-      "./test/test.mp3",
+      "test.mp3",
     );
-    expect(filenameResponse).toBe(path.resolve("./test/test.mp3"));
+    expect(filenameResponse).toBe(path.resolve("./test.mp3"));
   });
 
   it("raise rejection when providing invalid key", async () => {
