@@ -1,6 +1,6 @@
 {
   "name": "ai-fetcher",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A Node.js package that provides integration with popular language models. It is designed to facilitate easy and efficient ai-fetching tasks for your application.",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
