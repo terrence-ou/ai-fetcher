@@ -65,7 +65,7 @@ const conversationHistory = [
   { role: "user", content: "Yes, the sea." },
 ];
 
-// Caal the generate method
+// Call the generate method
 async function generateResponse() {
   try {
     const result = await claudeAgent.generate(
@@ -75,7 +75,32 @@ async function generateResponse() {
     console.log(result.content);
     return result.content;
   } catch (error) {
-    console.error();
+    console.error(error);
+  }
+}
+
+// execute the function and get the generated result
+generateResponse();
+```
+
+### OpenAI:
+
+#### *Chat Model*
+```javascript
+import { OpenAI } from "ai-fetcher"
+
+// Initialize the OpenAI chat agent with your API key and preferred model
+const openaiChatAgent = OpenAI.chat(YOUR_CLAUDE_API_KEY, "gpt-4o-mini");
+
+// Call the generate method
+async function generateResponse() {
+  try {
+    const result = await openaiChatAgent.generate([
+      { role: "user", content: "Randomly generate 20 words" },
+    ]);
+    console.log(result.choices[0].message.content);
+  } catch (error) {
+    console.error(error);
   }
 }
 
