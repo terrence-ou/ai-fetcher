@@ -23,7 +23,8 @@
     "coverage": "vitest run --coverage",
     "build": "tsc",
     "clean": "rm -rf ./dist/",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --fix",
+    "prepublish": "npm run clean && npm run build"
   },
   "type": "module",
   "devDependencies": {
