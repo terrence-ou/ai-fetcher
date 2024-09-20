@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
     "lib": [
-      "dom",
-      "es6"
+      "esnext"
     ],
-    "module": "ES2022",
     "declaration": true,
-    "outDir": "dist",
+    "declarationDir": "./dist/types",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "Node",
     "emitDeclarationOnly": false,
+    "baseUrl": ".",
+    "rootDir": "./src"
   },
   "include": [
     "src"
@@ -21,5 +20,5 @@
     "mode_modules",
     "dist",
     "src/__tests__/"
-  ],
+  ]
 }
