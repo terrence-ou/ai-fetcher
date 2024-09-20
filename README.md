@@ -16,6 +16,9 @@ $ npm install ai-fetcher@latest
 
 - DeepL - Supports both free and pro API keys;
 - Claude - Supports regular text generation for now;
+- OpenAI
+  - Chat - Supports chat generation;
+  - Text-to-Speech - Convery given texts to audio;
 
 ## Examples:
 ### DeepL:
@@ -87,10 +90,10 @@ generateResponse();
 
 #### *Chat Model*
 ```javascript
-import { OpenAI } from "ai-fetcher"
+import { OpenAI } from "ai-fetcher";
 
 // Initialize the OpenAI chat agent with your API key and preferred model
-const openaiChatAgent = OpenAI.chat(YOUR_CLAUDE_API_KEY, "gpt-4o-mini");
+const openaiChatAgent = OpenAI.chat(YOUR_OPENAI_API_KEY, "gpt-4o-mini");
 
 // Call the generate method
 async function generateResponse() {
@@ -106,4 +109,28 @@ async function generateResponse() {
 
 // execute the function and get the generated result
 generateResponse();
+```
+
+#### *Text-to-Speech(TTS) Model*
+```javascript
+import { OpenAI } from "ai-fetcher";
+
+// Initialize the OpenAI tts agent with your API key
+const openaiTTSAgent = OpenAI.textToSpeech(YOUR_OPENAI_API_KEY);
+
+async function convertTextToSpeech() {
+  try {
+    const result = await openaiTTSAgent.convert(
+      "Read this text.",
+      "filename",
+      "speech.mp3",
+    );
+    console.log(result); // The result is a filename
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// execute the function and get the generated result
+convertTextToSpeech();
 ```
