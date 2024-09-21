@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { DeepLResult } from "../types/types.js";
+import type { DeepLResult } from "../types/types";
 
 // The DeepL Agent class
 export class DeepL {

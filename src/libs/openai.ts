@@ -10,7 +10,7 @@ import {
   OpenAITTSResult,
   OpenAITTSVoice,
   OpenAITTSInputData,
-} from "../types/types.js";
+} from "../types/types";
 
 // The OpenAI Agent class
 export class OpenAI {

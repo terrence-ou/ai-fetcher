@@ -1,9 +1,16 @@
 {
   "name": "ai-fetcher",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "A Node.js package that provides integration with popular language models. It is designed to facilitate easy and efficient ai-fetching tasks for your application.",
-  "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.cjs",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "type": "module",
+  "types": "./dist/types/index.d.ts",
   "license": "MIT",
   "author": {
     "name": "Terrence Ou",
@@ -21,12 +28,13 @@
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "build": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json && npm run rename:cjs && node ./scripts/replace-js-with-cjs.js",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
     "clean": "rm -rf ./dist/",
-    "lint": "eslint src --fix",
-    "prepublish": "npm run clean && npm run build"
+    "rename:cjs": "/bin/zsh ./scripts/fix-cjs.sh",
+    "lint": "eslint src --fix"
   },
-  "type": "module",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@vitest/coverage-v8": "^2.0.5",
