@@ -60,12 +60,7 @@ const claudeAgent = new Claude(YOUR_CLAUDE_API_KEY, "claude-3-haiku-20240307"); 
 // example system prompt and message for generating a response
 const systemPrompt = "Write a haiku about the sea.";
 const conversationHistory = [
-  { role: "user", content: "Could you create a haiku about nature?" },
-  {
-    role: "assistant",
-    content:"Certainly! Would you like one about any specific aspect of nature?",
-  },
-  { role: "user", content: "Yes, the sea." },
+  { role: "user", content: [{ type: "text", text: "Randomly generate 10 words."] } }
 ];
 
 // Call the generate method
