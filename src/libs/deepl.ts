@@ -7,8 +7,8 @@ export class DeepL {
   private isPro: boolean; // Flag to indicate whether the user is using the pro version api
   private headers: { Authorization: string; "Content-Type": string }; // Headers for DeepL requests
 
-  public url: string; // The API endpoint url
-  public endpoints: { free: string; pro: string };
+  readonly url: string; // The API endpoint url
+  readonly endpoints: { free: string; pro: string };
 
   /**
    * Construcs a new instance of DeepL class

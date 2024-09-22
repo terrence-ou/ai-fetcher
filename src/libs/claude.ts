@@ -14,8 +14,8 @@ export class Claude {
     "anthropic-version": string;
     "Content-Type": string;
   }; // Headers for Claude requests
-  public endpoint: string; // The API endpoint url
-  public model: ClaudeModel; // The flag to specify the Claude model
+  readonly endpoint: string; // The API endpoint url
+  readonly model: ClaudeModel; // The flag to specify the Claude model
 
   /**
    * Constructs a new instance of Claude class

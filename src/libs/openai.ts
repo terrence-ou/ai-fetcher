@@ -41,8 +41,8 @@ export class Chat {
     "Content-Type": string;
     Authorization: string;
   }; // Headers for the OpenAI request
-  public model: OpenAIChatModel; // Available OpenAI chat models
-  public endpoint: string; // The chat API endpoint url
+  readonly model: OpenAIChatModel; // Available OpenAI chat models
+  readonly endpoint: string; // The chat API endpoint url
 
   /**
    * Constructs a new instance of OpenAI Chat class
@@ -91,12 +91,12 @@ export class Chat {
 // The OpenAI TextToSpeech class
 export class TextToSpeech {
   private apiKey: string; // API key provided by user
-  public model: OpenAISpeechModel; // Available OpenAI TTS model(s)
-  public endpoint: string; // The TTS API endpoint url/
   private headers: {
     "Content-Type": string;
     Authorization: string;
   }; // Headers for the OpenAI request
+  readonly model: OpenAISpeechModel; // Available OpenAI TTS model(s)
+  readonly endpoint: string; // The TTS API endpoint url/
 
   /**
    * Constructs a new instance of OpenAI TTS class
