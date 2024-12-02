@@ -4,7 +4,7 @@ import type {
   ClaudeMessage,
   ClaudeModel,
   ClaudeResult,
-} from "../types/types.js";
+} from "../types.js";
 
 // The Claude Agent class
 export class Claude {
@@ -24,7 +24,7 @@ export class Claude {
    */
   constructor(
     claudeKey: string,
-    model: ClaudeModel = "claude-3-haiku-20240307",
+    model: ClaudeModel = "claude-3-haiku-20240307"
   ) {
     this.api = claudeKey;
     this.endpoint = "https://api.anthropic.com/v1/messages";
@@ -51,7 +51,7 @@ export class Claude {
     system: string,
     messages: ClaudeMessage[],
     temperature: number = 0,
-    max_tokens: number = 1000,
+    max_tokens: number = 1000
   ): Promise<ClaudeResult> {
     // Limits the temperature between 0.0 and 1.0
     const validatedTemp = Math.min(1.0, Math.max(0.0, temperature));
