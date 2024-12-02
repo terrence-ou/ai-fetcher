@@ -10,7 +10,7 @@ import {
   OpenAITTSResult,
   OpenAITTSVoice,
   OpenAITTSInputData,
-} from "../types/types";
+} from "../types";
 
 // The OpenAI Agent class
 export class OpenAI {
@@ -20,7 +20,10 @@ export class OpenAI {
    * @param model (Optional): OpenAIChatModel - one of the available chat model provided by OpenAI. Defaults to "gpt-40-mini", the cheapest one
    * @returns An instance of OpenAI Chat model
    */
-  static chat(apiKey: string, model: OpenAIChatModel = "gpt-4o-mini") {
+  static chat(
+    apiKey: string,
+    model: OpenAIChatModel = "gpt-4o-mini"
+  ) {
     return new Chat(apiKey, model);
   }
 
@@ -68,10 +71,16 @@ export class Chat {
    */
   async generate(
     messages: OpenAIMessage[],
-    system = "You are a helpful assistant.",
+    system = "You are a helpful assistant."
   ): Promise<OpenAIChatResult> {
-    const systemMessage: OpenAIMessage = { role: "system", content: system };
-    const requestMessages: OpenAIMessage[] = [systemMessage, ...messages];
+    const systemMessage: OpenAIMessage = {
+      role: "system",
+      content: system,
+    };
+    const requestMessages: OpenAIMessage[] = [
+      systemMessage,
+      ...messages,
+    ];
     const data: OpenAIChatInputData = {
       model: this.model,
       messages: requestMessages,
@@ -129,11 +138,16 @@ export class TextToSpeech {
     text: string | undefined,
     returnType: "filename" | "buffer" | "base64" = "filename",
     filename: string = "speech.mp3",
-    voice: OpenAITTSVoice = "alloy",
+    voice: OpenAITTSVoice = "alloy"
   ): Promise<OpenAITTSResult> {
     // if the input text is undefined, throw an error
-    if (text === undefined) throw new Error("The input text is undefined");
-    const data: OpenAITTSInputData = { model: this.model, input: text, voice };
+    if (text === undefined)
+      throw new Error("The input text is undefined");
+    const data: OpenAITTSInputData = {
+      model: this.model,
+      input: text,
+      voice,
+    };
     try {
       const response = await axios.post(this.endpoint, data, {
         headers: this.headers,
@@ -142,7 +156,8 @@ export class TextToSpeech {
       const buffer = response.data as Buffer;
 
       if (returnType === "buffer") return buffer;
-      else if (returnType === "base64") return buffer.toString("base64");
+      else if (returnType === "base64")
+        return buffer.toString("base64");
       else if (returnType === "filename") {
         const validatedFilename = processFilename(filename);
         const outputPath = path.resolve(validatedFilename);
@@ -163,7 +178,9 @@ export class TextToSpeech {
  * @returns string - The processed filename with a valid ".mp3" extension and proper path structure.
  */
 export const processFilename = (originalFilename: string) => {
-  const paths = originalFilename.split("/").filter((path) => path !== "");
+  const paths = originalFilename
+    .split("/")
+    .filter((path) => path !== "");
   if (paths.length === 0) return "speech.mp3";
   const extension = paths.slice(-1)[0].slice(-4);
   if (extension !== ".mp3") paths.push("speech.mp3");

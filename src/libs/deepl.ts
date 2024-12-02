@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { DeepLResult } from "../types/types";
+import type { DeepLResult } from "../types";
 
 // The DeepL Agent class
 export class DeepL {
@@ -22,7 +22,9 @@ export class DeepL {
       free: "https://api-free.deepl.com/v2/translate",
       pro: "https://api.deepl.com/v2/translate",
     };
-    this.url = this.isPro ? this.endpoints["pro"] : this.endpoints["free"];
+    this.url = this.isPro
+      ? this.endpoints["pro"]
+      : this.endpoints["free"];
     this.headers = {
       Authorization: `DeepL-Auth-Key ${this.apiKey}`,
       "Content-Type": "application/json",
@@ -50,11 +52,14 @@ export class DeepL {
   }): Promise<DeepLResult> {
     // DeepL requires the input text to be an array of strings
     const inputText = typeof text === "string" ? [text] : text;
-    const data: { source_lang?: string; target_lang: string; text: string[] } =
-      {
-        text: inputText,
-        target_lang: to.toUpperCase(),
-      };
+    const data: {
+      source_lang?: string;
+      target_lang: string;
+      text: string[];
+    } = {
+      text: inputText,
+      target_lang: to.toUpperCase(),
+    };
     // source_lang is an optional attribute for the DeepL request
     if (from) {
       data.source_lang = from.toUpperCase();
